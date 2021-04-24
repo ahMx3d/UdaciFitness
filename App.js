@@ -1,13 +1,19 @@
-import { StatusBar } from "expo-status-bar"
 import React from "react"
-import { View, sStyleSheet } from "react-native"
+import { View } from "react-native"
+import { SafeAreaProvider } from "react-native-safe-area-context"
+import { combineReducers, createStore } from "redux"
+import { Provider } from "react-redux"
+import reducer from "./reducers"
 import Entry from "./components/Entry"
-import { getMetricMetaInfo } from "./utils/helpers";
 
 const App = () => (
-	<View>
-    <Entry/>
-	</View>
+	<Provider store={createStore(reducer)}>
+		<SafeAreaProvider>
+			<View style={{ flex: 1 }}>
+				<Entry />
+			</View>
+		</SafeAreaProvider>
+	</Provider>
 )
 
 export default App
