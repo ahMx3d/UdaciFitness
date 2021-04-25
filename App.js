@@ -13,6 +13,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons"
 import { purple, gray, white } from "./utils/colors"
 import StatusBar from "./components/StatusBar"
 import Detail from "./components/Detail"
+import Live from "./components/Live"
 
 const Tab = createBottomTabNavigator()
 
@@ -78,6 +79,7 @@ const App = () => (
 				<StatusBar barStyle="light-content" backgroundColor={purple} />
 				<NavigationContainer>
 					<Tab.Navigator
+						
 						screenOptions={({ route }) => ({
 							tabBarIcon : ({ focused, color, size }) => {
 								let iconName
@@ -104,6 +106,17 @@ const App = () => (
 											color={color}
 										/>
 									)
+								} else if (route.name === "Live") {
+									iconName = focused
+										? "ios-speedometer"
+										: "ios-speedometer-outline"
+									return (
+										<Ionicons
+											name={iconName}
+											size={size}
+											color={color}
+										/>
+									)
 								}
 							},
 						})}
@@ -114,6 +127,7 @@ const App = () => (
 					>
 						<Tab.Screen name="Entry" component={EntryStack} />
 						<Tab.Screen name="History" component={HistoryStack} />
+						<Tab.Screen name="Live" component={Live}  />
 					</Tab.Navigator>
 				</NavigationContainer>
 			</View>
