@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { View, Text, Platform, StyleSheet } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import { connect } from "react-redux"
+import { StackActions } from "@react-navigation/native"
 import { addEntry } from "../actions"
 import {
 	getMetricMetaInfo,
@@ -16,7 +17,7 @@ import Submit from "./buttons/Submit"
 import TextButton from "./buttons/TextButton"
 import { purple, white } from "../utils/colors"
 
-const Entry = ({ alreadyLogged, dispatch }) => {
+const Entry = ({ alreadyLogged, dispatch, navigation }) => {
 	const [ entry, setEntry ] = useState({
 		run   : 0,
 		bike  : 0,
@@ -71,7 +72,8 @@ const Entry = ({ alreadyLogged, dispatch }) => {
 			eat   : 0,
 		}))
 
-		// todo: navigate to home
+		// navigate to home
+		navigation.navigate('History')
 
 		// save to local storage
 		submitEntry({ key, entry })
@@ -85,11 +87,14 @@ const Entry = ({ alreadyLogged, dispatch }) => {
 		// update redux
 		dispatch(addEntry({ [key]: getDailyReminderValue() }))
 
-		// todo: route to home
+		// route to home
+		navigation.navigate('Entry')
 
 		// update local storage
 		removeEntry(key)
 	}
+
+	const toHome = () => navigation.dispatch(StackActions.replace("History"))
 
 	const metrics = getMetricMetaInfo()
 

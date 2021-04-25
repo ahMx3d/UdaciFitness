@@ -12,7 +12,6 @@ const Card = ({ date, metrics }) => (
 				getIcon,
 				displayName,
 				unit,
-				backgroundColor,
 			} = getMetricMetaInfo(metric)
 
 			return (

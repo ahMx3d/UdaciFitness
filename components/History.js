@@ -16,7 +16,7 @@ import { white } from "../utils/colors"
 import Header from "./Header"
 import Card from "./Card"
 
-const History = ({ dispatch, entries }) => {
+const History = ({ dispatch, entries, navigation }) => {
 	const [ isReady, setIsReady ] = useState(false)
 
 	useEffect(() => {
@@ -44,7 +44,7 @@ const History = ({ dispatch, entries }) => {
 					<Text style={styles.noDataText}>{today}</Text>
 				</View>
 			) : (
-				<TouchableOpacity onPress={() => console.log("pressed")}>
+				<TouchableOpacity onPress={() => navigation.navigate('Detail', {entryId: key})}>
 					<Card date={formattedDate} metrics={metrics} />
 				</TouchableOpacity>
 			)}
