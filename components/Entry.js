@@ -8,6 +8,8 @@ import {
 	getMetricMetaInfo,
 	timeToString,
 	getDailyReminderValue,
+	clearLocalNotifications,
+	setLocalNotification
 } from "../utils/helpers"
 import { removeEntry, submitEntry } from "../utils/api"
 import Slider from "./Slider"
@@ -73,12 +75,13 @@ const Entry = ({ alreadyLogged, dispatch, navigation }) => {
 		}))
 
 		// navigate to home
-		navigation.navigate('History')
+		navigation.navigate("History")
 
 		// save to local storage
 		submitEntry({ key, entry })
 
-		// todo: clear local notification
+		// clear local notification and set new for tomorrow
+		clearLocalNotifications().then(setLocalNotification())
 	}
 
 	const reset = () => {
@@ -88,7 +91,7 @@ const Entry = ({ alreadyLogged, dispatch, navigation }) => {
 		dispatch(addEntry({ [key]: getDailyReminderValue() }))
 
 		// route to home
-		navigation.navigate('Entry')
+		navigation.navigate("Entry")
 
 		// update local storage
 		removeEntry(key)
